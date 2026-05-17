@@ -235,17 +235,13 @@ export default function Hero() {
 
           {/* ===== PHONE IN HAND ===== */}
           <div
+            ref={phoneRef}
             style={{
               position: "absolute",
               top: "50%",
               left: "50%",
               translate: "-50% -50%",
               zIndex: 5,
-            }}
-          >
-          <div
-            ref={phoneRef}
-            style={{
               opacity: 0,
               width: "min(20vw, 180px)",
               aspectRatio: "0.48",
@@ -337,7 +333,6 @@ export default function Hero() {
               {/* Vertical product slider */}
               <ProductSlider />
           </div>
-          </div>
 
           {/* ===== FLOATING BADGES ===== */}
           {BADGES.map((badge, i) => (
@@ -399,7 +394,7 @@ function ProductSlider() {
           }
           return next;
         });
-      }, 2600);
+      }, 4000);
       return () => clearInterval(interval);
     }, 6000);
     return () => clearTimeout(startTimer);
@@ -426,7 +421,7 @@ function ProductSlider() {
           transform: `translateY(-${current * 100}%)`,
           transition: jumping
             ? "none"
-            : "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)",
+            : "transform 1.2s cubic-bezier(0.65, 0, 0.35, 1)",
         }}
       >
         {items.map((item, i) => (
