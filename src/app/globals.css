@@ -95,6 +95,13 @@ body {
   display: none;
 }
 
+@media (max-width: 768px) {
+  .phone-device {
+    width: min(26vw, 230px) !important;
+    border-radius: 8px !important;
+  }
+}
+
 /* Phone marquee - scroll right to left */
 @keyframes marquee {
   0% { transform: translateX(100%); }

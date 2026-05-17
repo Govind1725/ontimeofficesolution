@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import SplitType from "split-type";
 
 const BADGES = [
   {
@@ -59,17 +58,6 @@ export default function Hero() {
       },
     });
 
-    const rows = [
-      { light: row1LightRef, dark: row1DarkRef, word: "ontime" },
-      { light: row2LightRef, dark: row2DarkRef, word: "office" },
-      { light: row3LightRef, dark: row3DarkRef, word: "solution" },
-    ];
-
-    const splits = rows.map((row) => ({
-      light: new SplitType(row.light.current, { types: "chars" }),
-      dark: new SplitType(row.dark.current, { types: "chars" }),
-    }));
-
     tl.to(".preloader-column", {
       scaleY: 0,
       duration: 1.2,
@@ -79,58 +67,40 @@ export default function Hero() {
       .set("#preloader", { display: "none" })
       // 1. ontime
       .fromTo(
-        [row1LightRef.current, row1DarkRef.current],
-        { opacity: 0 },
-        { opacity: 1, duration: 0.001 },
-        "-=0.8"
-      )
-      .fromTo(
-        splits[0].light.chars,
-        { y: 80, opacity: 0, scale: 1.04 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
+        row1LightRef.current,
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" },
         "-=0.2"
       )
       .fromTo(
-        splits[0].dark.chars,
-        { y: 80, opacity: 0, scale: 1.04 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
-        "-=1.0"
+        row1DarkRef.current,
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" },
+        "-=0.6"
       )
       // 2. office
       .fromTo(
-        [row2LightRef.current, row2DarkRef.current],
-        { opacity: 0 },
-        { opacity: 1, duration: 0.001 }
+        row2LightRef.current,
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
       )
       .fromTo(
-        splits[1].light.chars,
-        { y: 80, opacity: 0, scale: 1.04 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
-        "-=0.8"
-      )
-      .fromTo(
-        splits[1].dark.chars,
-        { y: 80, opacity: 0, scale: 1.04 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
-        "-=1.0"
+        row2DarkRef.current,
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" },
+        "-=0.6"
       )
       // 3. solution
       .fromTo(
-        [row3LightRef.current, row3DarkRef.current],
-        { opacity: 0 },
-        { opacity: 1, duration: 0.001 }
+        row3LightRef.current,
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" }
       )
       .fromTo(
-        splits[2].light.chars,
-        { y: 80, opacity: 0, scale: 1.04 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
-        "-=0.8"
-      )
-      .fromTo(
-        splits[2].dark.chars,
-        { y: 80, opacity: 0, scale: 1.04 },
-        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
-        "-=1.0"
+        row3DarkRef.current,
+        { opacity: 0, y: 30, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "back.out(1.7)" },
+        "-=0.6"
       )
       // 4. hand
       .fromTo(
@@ -236,6 +206,7 @@ export default function Hero() {
           {/* ===== PHONE IN HAND ===== */}
           <div
             ref={phoneRef}
+            className="phone-device"
             style={{
               position: "absolute",
               top: "50%",
