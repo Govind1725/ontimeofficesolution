@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-hero-bg: #f8f9f6;
+  --color-body-bg: #000000;
+  --color-text-black: #030507;
+  --color-text-purple: #ca9fff;
+  --color-text-white: #f1f3f5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #000;
+}
+
+body {
+  background: #000;
+  color: #f1f3f5;
+  font-family: "Inter", "Neue Montreal", "Helvetica Neue", sans-serif;
+  line-height: 1.4;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ca9fff;
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.hero-section {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.grid-overlay::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 3rem;
+  right: 3rem;
+  height: 100%;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to right, transparent calc(100% / 10 * 1 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 1 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 1 + 0.5px), transparent calc(100% / 10 * 1 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 2 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 2 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 2 + 0.5px), transparent calc(100% / 10 * 2 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 3 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 3 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 3 + 0.5px), transparent calc(100% / 10 * 3 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 4 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 4 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 4 + 0.5px), transparent calc(100% / 10 * 4 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 5 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 5 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 5 + 0.5px), transparent calc(100% / 10 * 5 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 6 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 6 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 6 + 0.5px), transparent calc(100% / 10 * 6 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 7 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 7 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 7 + 0.5px), transparent calc(100% / 10 * 7 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 8 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 8 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 8 + 0.5px), transparent calc(100% / 10 * 8 + 0.5px)),
+    linear-gradient(to right, transparent calc(100% / 10 * 9 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 9 - 0.5px), rgba(255, 255, 255, 0.08) calc(100% / 10 * 9 + 0.5px), transparent calc(100% / 10 * 9 + 0.5px)),
+    linear-gradient(to left, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+}
+
+/* Preloader */
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  z-index: 99999;
+  pointer-events: none;
+}
+
+.preloader-column {
+  flex: 1;
+  height: 100%;
+  background-color: #000;
+  transform-origin: top center;
+}
+
+.preloader.complete {
+  display: none;
+}
+
+/* Phone marquee - scroll right to left */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.phone-marquee {
+  white-space: nowrap;
+  animation: marquee 8s linear infinite;
+}
+
+
