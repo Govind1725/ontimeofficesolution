@@ -86,14 +86,14 @@ export default function Hero() {
       )
       .fromTo(
         splits[0].light.chars,
-        { y: 120, opacity: 0, rotation: 6 },
-        { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.03, ease: "power4.out" },
+        { y: 80, opacity: 0, scale: 1.04 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
         "-=0.2"
       )
       .fromTo(
         splits[0].dark.chars,
-        { y: 120, opacity: 0, rotation: -4 },
-        { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.03, ease: "power4.out" },
+        { y: 80, opacity: 0, scale: 1.04 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
         "-=1.0"
       )
       // 2. office
@@ -104,14 +104,14 @@ export default function Hero() {
       )
       .fromTo(
         splits[1].light.chars,
-        { y: 120, opacity: 0, rotation: 6 },
-        { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.03, ease: "power4.out" },
+        { y: 80, opacity: 0, scale: 1.04 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
         "-=0.8"
       )
       .fromTo(
         splits[1].dark.chars,
-        { y: 120, opacity: 0, rotation: -4 },
-        { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.03, ease: "power4.out" },
+        { y: 80, opacity: 0, scale: 1.04 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
         "-=1.0"
       )
       // 3. solution
@@ -122,14 +122,14 @@ export default function Hero() {
       )
       .fromTo(
         splits[2].light.chars,
-        { y: 120, opacity: 0, rotation: 6 },
-        { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.03, ease: "power4.out" },
+        { y: 80, opacity: 0, scale: 1.04 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
         "-=0.8"
       )
       .fromTo(
         splits[2].dark.chars,
-        { y: 120, opacity: 0, rotation: -4 },
-        { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.03, ease: "power4.out" },
+        { y: 80, opacity: 0, scale: 1.04 },
+        { y: 0, opacity: 1, scale: 1, duration: 1.4, stagger: 0.02, ease: "power2.out" },
         "-=1.0"
       )
       // 4. hand
@@ -267,14 +267,53 @@ export default function Hero() {
                   height: 22,
                   background: "#000",
                   borderRadius: "0 0 14px 14px",
-                  zIndex: 10,
+                  zIndex: 13,
                 }}
               />
+              {/* Status bar */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  zIndex: 12,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-start",
+                  padding: "5px 14px 0",
+                  pointerEvents: "none",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: "clamp(0.35rem, 0.55vw, 0.45rem)",
+                    fontWeight: 700,
+                    color: "#666",
+                    fontFamily: "var(--font-inter), sans-serif",
+                  }}
+                >
+                  11:11
+                </span>
+                <div style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                  <svg width="9" height="9" viewBox="0 0 12 12" fill="none">
+                    <path d="M1 5.5C3.2 3.5 6 2.5 9 2.5s5.8 1 8 3" stroke="#666" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+                    <path d="M3.5 7.5C5 6.2 7 5.5 9 5.5s4 0.7 5.5 2" stroke="#666" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+                    <path d="M6 9.5C7 8.8 8 8.5 9 8.5s2 0.3 3 1" stroke="#666" strokeWidth="1.4" strokeLinecap="round" fill="none"/>
+                    <circle cx="9" cy="11" r="1" fill="#666"/>
+                  </svg>
+                  <svg width="11" height="8" viewBox="0 0 14 10" fill="none">
+                    <rect x="0.5" y="0.5" width="11" height="9" rx="1.5" stroke="#666" strokeWidth="1.2" fill="none"/>
+                    <rect x="1.8" y="2" width="8.4" height="6" rx="0.5" fill="#666"/>
+                    <path d="M12 3v4a2 2 0 0 0 0-4z" fill="#666"/>
+                  </svg>
+                </div>
+              </div>
               {/* Marquee line - partner name right to left */}
               <div
                 style={{
                   overflow: "hidden",
-                  padding: "6px 0",
+                  padding: "24px 0 6px",
                   background: "rgba(0,0,0,0.03)",
                   borderTop: "1px solid rgba(0,0,0,0.06)",
                   borderBottom: "1px solid rgba(0,0,0,0.06)",
@@ -350,22 +389,27 @@ function ProductSlider() {
   const items = [...PRODUCTS, ...PRODUCTS];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent(prev => prev + 1);
-    }, 3200);
-    return () => clearInterval(timer);
+    const startTimer = setTimeout(() => {
+      const interval = setInterval(() => {
+        setCurrent(prev => {
+          const next = prev + 1;
+          if (next > PRODUCTS.length) {
+            setJumping(true);
+            return 0;
+          }
+          return next;
+        });
+      }, 2600);
+      return () => clearInterval(interval);
+    }, 6000);
+    return () => clearTimeout(startTimer);
   }, []);
 
   useEffect(() => {
-    if (current >= PRODUCTS.length) {
-      const timer = setTimeout(() => {
-        setJumping(true);
-        setCurrent(0);
-        requestAnimationFrame(() => setJumping(false));
-      }, 1100);
-      return () => clearTimeout(timer);
+    if (jumping) {
+      requestAnimationFrame(() => setJumping(false));
     }
-  }, [current]);
+  }, [jumping]);
 
   return (
     <div
@@ -379,40 +423,28 @@ function ProductSlider() {
         style={{
           width: "100%",
           height: "100%",
-          transform: `translateY(-${current * 60}%)`,
+          transform: `translateY(-${current * 100}%)`,
           transition: jumping
             ? "none"
-            : "transform 1s cubic-bezier(0.65, 0, 0.35, 1)",
+            : "transform 0.8s cubic-bezier(0.65, 0, 0.35, 1)",
         }}
       >
-        {items.map((item, i) => {
-          const isActive = i === current;
-          return (
+        {items.map((item, i) => (
             <div
               key={i}
               style={{
-                height: "60%",
+                height: "100%",
                 background: item.bg,
                 borderRadius: 20,
-                margin: "6px 10px",
-                padding: "12px 12px 10px",
+                margin: "0 10px",
+                padding: "20px 16px 14px",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "space-between",
                 boxSizing: "border-box",
-                transform: jumping || isActive ? "scale(1)" : "scale(0.93)",
-                filter: jumping || isActive ? "blur(0)" : "blur(2px)",
-                opacity: jumping || isActive ? 1 : 0.4,
-                transition: jumping
-                  ? "none"
-                  : "transform 0.8s ease, filter 0.8s ease, opacity 0.8s ease",
-                boxShadow: isActive
-                  ? "0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04)"
-                  : "0 2px 8px rgba(0,0,0,0.03)",
-                border: isActive ? "1px solid rgba(0,0,0,0.06)" : "1px solid rgba(0,0,0,0.03)",
-                position: "relative",
-                overflow: "hidden",
+                boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
+                border: "1px solid rgba(0,0,0,0.04)",
               }}
             >
               <div
@@ -433,11 +465,7 @@ function ProductSlider() {
                     maxWidth: "92%",
                     objectFit: "contain",
                     borderRadius: 16,
-                    filter: isActive ? "brightness(1)" : "brightness(0.85)",
-                    transition: "filter 0.8s ease",
-                    boxShadow: isActive
-                      ? "0 4px 24px rgba(0,0,0,0.06)"
-                      : "none",
+                    boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
                   }}
                 />
               </div>
@@ -473,8 +501,7 @@ function ProductSlider() {
                 </div>
               </div>
             </div>
-          );
-        })}
+          ))}
       </div>
     </div>
   );
